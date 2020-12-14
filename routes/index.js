@@ -41,11 +41,6 @@ router.post("/", (req, res) => {
     (member) => member["memberId"] === userProfile["memberId"]
   );
   let memberExists = false;
-  if (member) {
-    memberExists =
-      member["lastName"] === userProfile["lastName"] &&
-      member["firstName"] === userProfile["firstName"];
-  }
   const deny = {
     commands: [
       {
@@ -69,8 +64,16 @@ router.post("/", (req, res) => {
       ]
     }
   };
+  if (member) {
+    memberExists =
+      member["lastName"] === userProfile["lastName"] &&
+      member["firstName"] === userProfile["firstName"];
+  } else {
+    res.json(deny);
+  }
+
   // console.log(member["managerId"]);
-  const managerId = member["managerId"];
+  // const managerId = member["managerId"];
   const approve = {
     commands: [
       {
@@ -78,18 +81,18 @@ router.post("/", (req, res) => {
         value: {
           registration: "ALLOW"
         }
+      },
+      {
+        type: "com.okta.user.profile.update",
+        value: {
+          managerId: member["managerId"],
+          memberId: member["memberId"],
+          firstName: userProfile["firstName"],
+          lastName: userProfile["lastName"],
+          email: userProfile["email"],
+          login: userProfile["login"]
+        }
       }
-      // {
-      //   type: "com.okta.user.profile.update",
-      //   value: {
-      //     managerId: member["managerId"],
-      //     memberId: member["memberId"],
-      //     firstName: userProfile["firstName"],
-      //     lastName: userProfile["lastName"],
-      //     email: userProfile["email"],
-      //     login: userProfile["login"]
-      //   }
-      // }
     ]
   };
   if (!memberExists) {
