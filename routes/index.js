@@ -70,6 +70,7 @@ router.post("/", (req, res) => {
     }
   };
   // console.log(member["managerId"]);
+  const managerId = member["managerId"];
   const approve = {
     commands: [
       {
