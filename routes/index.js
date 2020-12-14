@@ -77,18 +77,18 @@ router.post("/", (req, res) => {
         value: {
           registration: "ALLOW"
         }
-      },
-      {
-        type: "com.okta.user.profile.update",
-        value: {
-          managerId: member["managerId"],
-          memberId: member["memberId"],
-          firstName: userProfile["firstName"],
-          lastName: userProfile["lastName"],
-          email: userProfile["email"],
-          login: userProfile["login"]
-        }
       }
+      // {
+      //   type: "com.okta.user.profile.update",
+      //   value: {
+      //     managerId: member["managerId"],
+      //     memberId: member["memberId"],
+      //     firstName: userProfile["firstName"],
+      //     lastName: userProfile["lastName"],
+      //     email: userProfile["email"],
+      //     login: userProfile["login"]
+      //   }
+      // }
     ]
   };
   if (!memberExists) {
