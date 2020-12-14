@@ -43,7 +43,7 @@ router.post("/", (req, res) => {
       ]
     }
   };
-  res.json(JSON.parse(payload));
+  res.json({ test: "test" });
 });
 
 app.use("/.netlify/functions/index", router);
