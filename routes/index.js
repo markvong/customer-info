@@ -30,6 +30,14 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
   const payload = {
+    commands: [
+      {
+        type: "com.okta.action.update",
+        value: {
+          registration: "DENY"
+        }
+      }
+    ],
     error: {
       errorSummary: "Errors were found in the user profile",
       errorCauses: [
