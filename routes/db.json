@@ -1,0 +1,14 @@
+{
+  "members": [
+    {
+      "memberId": 1234,
+      "firstName": "Mark",
+      "lastName": "Vong"
+    },
+    {
+      "memberId": 12345,
+      "firstName": "Meek",
+      "lastName": "Vong"
+    }
+  ]
+}
