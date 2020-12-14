@@ -29,7 +29,7 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  res.json({ test: "test" });
+  res.json(req);
 });
 
 app.use("/.netlify/functions/index", router);
