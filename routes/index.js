@@ -11,8 +11,6 @@ const serverless = require("serverless-http");
 
 router.get("/", (req, res) => {
   fs.readFile(__dirname + "/db.json", (err, json) => {
-    // let obj = JSON.parse(json);
-    // console.log(json);
     res.json({
       members: [
         {
@@ -28,6 +26,10 @@ router.get("/", (req, res) => {
       ]
     });
   });
+});
+
+router.post("/", (req, res) => {
+  res.json({ test: "test" });
 });
 
 app.use("/.netlify/functions/index", router);
