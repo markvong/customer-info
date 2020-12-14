@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "./node_modules/.bin/netlify-lambda serve routes",
-    "build-serv": "./node_modules/.bin/netlify-lambda build routes"
+    "build": "./node_modules/.bin/netlify-lambda build routes"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
