@@ -15,11 +15,13 @@ app.use(bodyParser.json());
 const members = [
   {
     memberId: 1234,
+    managerId: 21234,
     firstName: "Mark",
     lastName: "Vong"
   },
   {
     memberId: 12345,
+    managerId: 21234,
     firstName: "Meek",
     lastName: "Vong"
   }
@@ -27,25 +29,22 @@ const members = [
 router.get("/", (req, res) => {
   fs.readFile(__dirname + "/db.json", (err, json) => {
     res.json({
-      members: [
-        {
-          memberId: 1234,
-          managerId: 21234,
-          firstName: "Mark",
-          lastName: "Vong"
-        },
-        {
-          memberId: 12345,
-          managerId: 21234,
-          firstName: "Meek",
-          lastName: "Vong"
-        }
-      ]
+      members: members
     });
   });
 });
 
 router.post("/", (req, res) => {
+  const userProfile = req.body["data"]["userProfile"];
+  const member = members.find(
+    (member) => member["memberId"] === userProfile["memberId"]
+  );
+  let memberExists = false;
+  if (member) {
+    memberExists =
+      member["lastName"] === userProfile["lastName"] &&
+      member["firstName"] === userProfile["firstName"];
+  }
   const deny = {
     commands: [
       {
@@ -69,7 +68,7 @@ router.post("/", (req, res) => {
       ]
     }
   };
-
+  console.log(member);
   const approve = {
     commands: [
       {
@@ -77,24 +76,24 @@ router.post("/", (req, res) => {
         value: {
           registration: "ALLOW"
         }
+      },
+      {
+        type: "com.okta.user.profile.update",
+        value: {
+          managerId: member["managerId"],
+          memberId: member["memberId"],
+          firstName: userProfile["firstName"],
+          lastName: userProfile["lastName"],
+          email: userProfile["email"],
+          login: userProfile["login"]
+        }
       }
     ]
   };
-  const userProfile = req.body["data"]["userProfile"];
-  const member = members.find(
-    (member) => member["memberId"] === userProfile["memberId"]
-  );
-  let memberExists = false;
-  if (member) {
-    memberExists =
-      member["lastName"] === userProfile["lastName"] &&
-      member["firstName"] === userProfile["firstName"];
-  }
-  if (memberExists) {
-    res.json(approve);
-  } else {
+  if (!memberExists) {
     res.json(deny);
   }
+  res.json(approve);
 });
 
 app.use("/.netlify/functions/index", router);
