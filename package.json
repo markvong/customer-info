@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "./node_modules/.bin/netlify-lambda serve routes",
+    "build-serv": "./node_modules/.bin/netlify-lambda build routes"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -12,6 +13,8 @@
     "fs": "0.0.1-security",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "netlify-lambda": "^2.0.2",
+    "serverless-http": "^2.6.0"
   }
 }
