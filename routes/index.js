@@ -29,7 +29,21 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  res.json(req);
+  const payload = {
+    error: {
+      errorSummary: "Errors were found in the user profile",
+      errorCauses: [
+        {
+          errorSummary: "You specified an invalid email domain",
+          reason: "INVALID_EMAIL_DOMAIN",
+          locationType: "body",
+          location: "data.userProfile.login",
+          domain: "end-user"
+        }
+      ]
+    }
+  };
+  res.json(JSON.parse(payload));
 });
 
 app.use("/.netlify/functions/index", router);
