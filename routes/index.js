@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use("/.netlify/functions/index", router);
 
 /* GET home page. */
 // router.get("/", function (req, res, next) {
@@ -68,7 +69,7 @@ router.post("/", (req, res) => {
       ]
     }
   };
-  console.log(member);
+  // console.log(member["managerId"]);
   const approve = {
     commands: [
       {
@@ -92,10 +93,9 @@ router.post("/", (req, res) => {
   };
   if (!memberExists) {
     res.json(deny);
+  } else {
+    res.json(approve);
   }
-  res.json(approve);
 });
-
-app.use("/.netlify/functions/index", router);
 
 module.exports.handler = serverless(app);
