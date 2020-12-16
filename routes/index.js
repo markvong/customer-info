@@ -9,10 +9,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use("/.netlify/functions/index", router);
 
-/* GET home page. */
-// router.get("/", function (req, res, next) {
-//   res.render("index", { title: "Express" });
-// });
 const members = [
   {
     memberId: 1234,
@@ -25,6 +21,12 @@ const members = [
     managerId: 21234,
     firstName: "Meek",
     lastName: "Vong"
+  },
+  {
+    memberId: 54321,
+    managerId: 6789,
+    firstName: "Alex",
+    lastName: "Man"
   }
 ];
 router.get("/", (req, res) => {
@@ -66,8 +68,10 @@ router.post("/", (req, res) => {
   };
   if (member) {
     memberExists =
-      member["lastName"] === userProfile["lastName"] &&
-      member["firstName"] === userProfile["firstName"];
+      member["lastName"].toLowerCase() ===
+        userProfile["lastName"].toLowerCase() &&
+      member["firstName"].toLowerCase() ===
+        userProfile["firstName"].toLowerCase();
   } else {
     res.json(deny);
   }
