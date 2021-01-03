@@ -39,6 +39,18 @@ const members = [
     managerId: 1234,
     firstName: "Kevin",
     lastName: "Bacon"
+  },
+  {
+    memberId: 5432,
+    managerId: 1234,
+    firstName: "Kevin",
+    lastName: "Ross"
+  },
+  {
+    memberId: 9812,
+    managerId: 2136,
+    firstName: "Louis",
+    lastName: "Garcia"
   }
 ];
 router.get("/", (req, res) => {
