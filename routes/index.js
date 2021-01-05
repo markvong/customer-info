@@ -12,7 +12,7 @@ app.use("/.netlify/functions/index", router);
 const members = [
   {
     memberId: 2,
-    managerId: 0001,
+    managerId: 1,
     firstName: "Tom",
     lastName: "Smith"
   },
