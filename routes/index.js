@@ -11,34 +11,16 @@ app.use("/.netlify/functions/index", router);
 
 const members = [
   {
+    memberId: 2,
+    managerId: 0001,
+    firstName: "Tom",
+    lastName: "Smith"
+  },
+  {
     memberId: 1234,
     managerId: 21234,
     firstName: "Mark",
     lastName: "Vong"
-  },
-  {
-    memberId: 12345,
-    managerId: 21234,
-    firstName: "Meek",
-    lastName: "Vong"
-  },
-  {
-    memberId: 54321,
-    managerId: 6789,
-    firstName: "Alex",
-    lastName: "Man"
-  },
-  {
-    memberId: 1234,
-    managerId: 4567,
-    firstName: "Bob",
-    lastName: "Burgess"
-  },
-  {
-    memberId: 9876,
-    managerId: 1234,
-    firstName: "Kevin",
-    lastName: "Bacon"
   },
   {
     memberId: 5432,
